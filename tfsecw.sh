@@ -22,5 +22,5 @@ ls -alt "$(pwd)/tfsec_dir"
 
 $(pwd)/tfsec_dir/tfsec . -f junit > tfsec_results.xml
 
-# echo "------------------------------------------------"
-# cat tfsec_results.xml
+echo "------------------------------------------------"
+cat tfsec_results.xml
