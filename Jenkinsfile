@@ -5,7 +5,7 @@ pipeline {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
         choice(name: 'action', choices: ['apply','destroy'])
     }
-
+ 
     environment {
         def dockerHome = tool 'myDocker'
         PATH = "${dockerHome}/bin:${env.PATH}"
