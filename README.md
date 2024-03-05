@@ -10,19 +10,19 @@
 * [Jenkins 설치하기](#jenkins-----)
 	+ [사전 준비사항](#-------)
 	+ [Jenkins 컨테이너 실행하기](#jenkins----------)
-	+ [Jenkins 내부에 docker 실행하기.](#jenkins-----docker-----)
-* [Jenkins Console 구성하기.](#jenkins-console-----)
+	+ [Jenkins 내부에 docker 실행하기](#jenkins-----docker-----)
+* [Jenkins Console 구성하기](#jenkins-console-----)
 	+ [이후 초기화 하기](#---------)
 	+ [Docker 플러그인 구성하기](#docker----------)
 	+ [Global Tool 설정하기](#global-tool-----)
-	+ [Node 관리로 실행할 노드 지정하기.](#node----------------)
+	+ [Node 관리로 실행할 노드 지정하기](#node----------------)
 * [파이프라인 구상하기](#----------)
-* [tfsecw.sh 파일 작성하기.](#tfsecwsh--------)
+* [tfsecw.sh 파일 작성하기](#tfsecwsh--------)
 * [docker가 아닌 tfsec 파일을 직접 받아서 실행하기](#docker-----tfsec----------------)
 * [terraformw 파일 작성하기](#terraformw--------)
-* [Jenkinsfile 으로 파이프라인 작성하기.](#jenkinsfile--------------)
+* [Jenkinsfile 으로 파이프라인 작성하기](#jenkinsfile--------------)
 * [Terraform sample 작성하기](#terraform-sample-----)
-* [Jenkins Job 생성하기.](#jenkins-job-----)
+* [Jenkins Job 생성하기](#jenkins-job-----)
 * [실행결과 (정상 케이스)](#-------------)
 * [실행결과 (비정상 케이스)](#--------------)
 	+ [tfsec 처리 결과 파일 확인하기](#tfsec--------------)
@@ -62,7 +62,7 @@ sudo docker run -d --name myjenkins \
 - '-p 8080:8080 -p 50000:50000': jenkins 포트를 연결한다. 8080으로 화면에 접근한다. 50000은 내부에서 사용한다. 
 - 'jenkins/jenkins': 최신 jenkins 컨테이너 이미지를 지정한다. 
 
-### Jenkins 내부에 docker 실행하기. 
+### Jenkins 내부에 docker 실행하기
 
 - 아래 명령어로 컨테이너 내부에 root 게정으로 접근한다. 
 
@@ -85,7 +85,7 @@ $ docker ps
 
 - 위 결과가 정상으로 수행되면 다음 단계로 넘어갈 준비가 된 것이다. 
 
-## Jenkins Console 구성하기. 
+## Jenkins Console 구성하기
 
 - 이제 Jenkins Console에 접근하여 초기화를 마무리하자. 
 
@@ -138,7 +138,7 @@ $ docker exec -it myjenkins bash -c 'cat /var/jenkins_home/secrets/initialAdminP
 - Download from docker.com 항목을 선택한다. 
 - Docker version: latest 로 선택한다. 
   
-### Node 관리로 실행할 노드 지정하기. 
+### Node 관리로 실행할 노드 지정하기
 
 - 이 부분은 Jenkins Job이 실행될때 실행될 노드를 선택하는 부분이다. 
 - 우리는 노드를 지정하는 Jenkinsfile 을 이용하므로 아래와 같이 노드를 선택해주자. 
@@ -166,7 +166,7 @@ $ docker exec -it myjenkins bash -c 'cat /var/jenkins_home/secrets/initialAdminP
 
 - 위 과정에서 중요한 것은 과정을 진행하면서 오류가 발생하면, 더이상 작업을 진행하지 않도록 하는데 있다. 
 - 특히 tfsec, terraform 에서 작업 오류인경우 작업을 멈춘다. 
-## tfsecw.sh 파일 작성하기. 
+## tfsecw.sh 파일 작성하기
 
 - 이제 우리는 tfsec을 이용하여 terraform 을 정적 분석 할 것이다. 
 - 이때 docker커맨드를 이용하여 현재 체크아웃 받은 디렉토리를 검사하게 된다. 
@@ -221,7 +221,7 @@ $(pwd)/tfsec_dir/tfsec . -f junit > tfsec_results.xml
 
 ```
 
-- 위와 같이 직접 tfsec 을 다운로드 받아서 실행한다. 
+- 위와 같이 직접 tfsec 을 다운로드 받아서 실행한다
 ## terraformw 파일 작성하기 
 
 - terraformw는 tfswitch 를 이용하여 최신 테라폼을 설치하고, 이를 이용하여 terraform 을 실행하도록 해준다. 
@@ -259,7 +259,7 @@ terraform $*
 - terraformw 는 terraform에 전달되는 파라미터에 따라 다양한 처리를 할 수 있다. 
   - 예를 들어 terraform plan 을 수행하거나, terraform apply, terraform destroy 등을 수행할 수 있게 된다. 
 
-## Jenkinsfile 으로 파이프라인 작성하기. 
+## Jenkinsfile 으로 파이프라인 작성하기
 
 - 이제는 Jenkinsfile 을 작성하여 파이프라인을 구성할 것이다. 
 - 순서는 이전에 설명한것과 같으며 Jenkinsfile 을 생성하고, 아래와 같이 입력한다. 
@@ -427,7 +427,7 @@ output "jenkins_terraform" {
 - 우선 'bad_example' 을 먼저 작성하고 good_example은 주석처리해 둔다. 
 - 그리고 github에 커밋하자. 
 
-## Jenkins Job 생성하기. 
+## Jenkins Job 생성하기
 
 - 이제 Jenkins에서 새로운 아이템을 만들자. 
 
@@ -517,7 +517,7 @@ output "jenkins_terraform" {
 
 - 오류 파일에 오류 상세 정보를 확인할 수 있다. 
 
-### Jenkins 처리결과 확인하기. 
+### Jenkins 처리결과 확인하기
 
 ```py
 ... 생략
