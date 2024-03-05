@@ -55,39 +55,16 @@ pipeline {
           junit allowEmptyResults: true, testResults: 'tfsec_results.xml', skipPublishingChecks: true
         }
         success {
-          // slackSend channel: '', color: 'good', message: 'SUCCESSFUL', teamDomain: '', tokenCredentialId: 'secret-text'
           echo "Tfsec passed" 
         }
         unstable {
-          // script {
-          //   TFSEC_RESULTS = sh (
-          //     script: 'cat tfsec_results.xml',
-          //     returnStdout: true
-          //   ).trim()
-          //   slackSend channel: '', color: 'danger', message: "[tfsec terraform] Unstable: ${TFSEC_RESULTS}", teamDomain: '', tokenCredentialId: 'secret-text' 
-          // }
           error "TfSec Unstable"
         }
         failure {
-          // script {
-          //   TFSEC_RESULTS = sh (
-          //     script: 'cat tfsec_results.xml',
-          //     returnStdout: true
-          //   ).trim()
-          //   slackSend channel: '', color: 'danger', message: "[tfsec terraform] Failed: ${TFSEC_RESULTS}", teamDomain: '', tokenCredentialId: 'secret-text' 
-          // }
           error "Tfsec failed"
         }
       }
     }
-    // stage('terraform') {
-    //   failFast true
-    //   steps {
-    //     sh 'ls .'
-    //     sh 'chmod 755 ./terraformw'
-    //     sh './terraformw apply -auto-approve -no-color'
-    //   }
-    // }
     stage('Approval') {
            when {
                not {
