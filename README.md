@@ -8,6 +8,7 @@
 
 ## Table of contents
 [1. Jenkins 설치하기](#Jenkins-설치하기)
+[2. Jenkins Console 구성하기]
 
 ## Jenkins 설치하기 
 
