@@ -16,7 +16,7 @@ curl -fsSLO https://github.com/aquasecurity/tfsec/releases/download/v1.18.0/tfse
 
 mkdir "$(pwd)/tfsec_dir"
 
-tar xzvf tfsec_1.18.0_linux_amd64.tar.gz -C "$(pwd)/tfsec_dir"
+tar xzvf tfsec_1.18.0_linux_arm64.tar.gz -C "$(pwd)/tfsec_dir"
 
 ls -alt "$(pwd)/tfsec_dir"
 
