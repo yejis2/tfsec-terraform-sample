@@ -7,7 +7,7 @@
 - 여기서는 tfsec으로 테라폼 코드를 확인하고, terraform으로 프로비져닝 단계를 Jenkins Pipeline으로 구성할 것이다. 
 
 ## Table of contents
-[1. Jenkins 설치하기])(#Jenkins-설치하기)
+[1. Jenkins 설치하기](#Jenkins-설치하기)
 
 ## Jenkins 설치하기 
 
