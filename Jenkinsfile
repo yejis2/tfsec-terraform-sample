@@ -1,9 +1,18 @@
 
 pipeline {
   agent any
+  parameters {
+    string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
+    booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+    choice(name: 'action', choices: ['apply','destroy']
+  }
+
   environment {
     def dockerHome = tool 'myDocker'
     PATH = "${dockerHome}/bin:${env.PATH}"
+    AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    REGION = credentials('AWS_REGION')
   }
   options {
     skipDefaultCheckout(true)
