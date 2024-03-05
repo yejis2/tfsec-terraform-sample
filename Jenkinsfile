@@ -24,6 +24,13 @@ pipeline {
         checkout scm
       }
     }
+    stage('Plan') {
+            steps {
+                sh 'terraform init -upgrade'
+                sh "terraform validate"
+                sh "terraform plan"
+            }
+    }
     stage('tfsec') {
       failFast true
       steps {
@@ -72,6 +79,26 @@ pipeline {
     //     sh './terraformw apply -auto-approve -no-color'
     //   }
     // }
+    stage('Approval') {
+           when {
+               not {
+                   equals expected: true, actual: params.autoApprove
+               }
+           }
+           
+           steps {
+               script {
+                    input message: "Do you want to apply the plan?",
+                    parameters: [text(name: 'Plan', description: 'Please review the plan')]
+
+               }
+           }
+    }
+    stage('Apply or Destroy') {
+            steps {
+                sh 'terraform ${action} --auto-approve'
+            }
+        }
   }
   post {
     always {
